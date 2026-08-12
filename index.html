@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Portofolio Siswa</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+        .card { border: 1px solid #ccc; padding: 20px; border-radius: 10px; max-width: 400px; margin: auto; }
+        img { width: 150px; border-radius: 50%; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1 id="nama">Memuat...</h1>
+        <p id="bio"></p>
+        <p><strong>Proyek:</strong> <span id="proyek"></span></p>
+        <a id="link" href="#">Lihat Proyek</a>
+    </div>
+
+    <script>
+    const API_URL = "[https://script.google.com/macros/s/AKfycbx92fys1rkStE3ZWUCbQj3RSgp3Fp7T0aEP9g77pTA28_1cNL0D82cDYcoO89t_3jp3Zg/exec]"; 
+    
+    fetch(API_URL + "?id=1") // Kita paksa ambil data baris ke-2 (id=1)
+        .then(response => {
+            if (!response.ok) throw new Error('Gagal terhubung ke database');
+            return response.json();
+        })
+        .then(data => {
+            console.log("Data diterima:", data); // Lihat hasil di F12 > Console
+            document.getElementById('nama').innerText = data.nama;
+            document.getElementById('bio').innerText = data.bio;
+            document.getElementById('proyek').innerText = data.proyek;
+            document.getElementById('link').href = data.link;
+        })
+        .catch(err => {
+            document.getElementById('nama').innerText = "Error: " + err.message;
+            console.error(err);
+        });
+</script>
+</body>
+</html>
